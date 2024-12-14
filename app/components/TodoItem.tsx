@@ -6,11 +6,15 @@ type Todo = {
   completed: boolean
 }
 
-const TodoItem: FC<{ todo: Todo }> = ({ todo: { id, text, completed } }) => {
+const TodoItem: FC<{
+  todo: Todo
+  toggleTodo: (id: number) => void
+  deleteTodo: (id: number) => void
+}> = ({ todo: { id, text, completed }, toggleTodo, deleteTodo }) => {
   return (
     <li key={id}>
-      <span>{text}</span>
-      <button>Delete</button>
+      <span onClick={() => toggleTodo(id)}>{text}</span>
+      <button onClick={() => deleteTodo(id)}>Delete</button>
     </li>
   )
 }

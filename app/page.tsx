@@ -2,6 +2,7 @@
 
 import React, { FC, useState } from 'react'
 import TodoList from './components/TodoList'
+import { log } from 'console'
 
 type Todo = {
   id: number
@@ -19,6 +20,19 @@ const Home: FC = () => {
     setNewTodo('')
   }
 
+  const deleteTodo = (id: number) => {
+    setTodos(todos.filter(todo => todo.id !== id))
+    console.log(todos)
+  }
+
+  const toggleTodo = (id: number) => {
+    setTodos(
+      todos.map(todo =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    )
+  }
+
   return (
     <>
       <input
@@ -28,7 +42,7 @@ const Home: FC = () => {
         placeholder='Add a new todo'
       />
       <button onClick={addTodo}>Add</button>
-      <TodoList todos={todos} />
+      <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
     </>
   )
 }

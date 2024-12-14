@@ -7,11 +7,20 @@ type Todo = {
   completed: boolean
 }
 
-const TodoList: FC<{ todos: Todo[] }> = ({ todos }) => {
+const TodoList: FC<{
+  todos: Todo[]
+  toggleTodo: (id: number) => void
+  deleteTodo: (id: number) => void
+}> = ({ todos, toggleTodo, deleteTodo }) => {
   return (
     <ul>
       {todos.map(todo => (
-        <TodoItem key={todo.id} todo={todo} />
+        <TodoItem
+          key={todo.id}
+          todo={todo}
+          toggleTodo={toggleTodo}
+          deleteTodo={deleteTodo}
+        />
       ))}
     </ul>
   )
